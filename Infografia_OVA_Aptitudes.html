@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infografía OVA – Evaluación de Aptitudes e Intereses</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:   #0D3349;
+    --teal:   #0D7377;
+    --teal2:  #14A085;
+    --gold:   #E8A838;
+    --light:  #F0F7F7;
+    --white:  #FFFFFF;
+    --gray:   #64748B;
+    --lgray:  #E2EBF0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Source Sans 3', sans-serif; background: #EFF4F7; min-height: 100vh; }
+
+  .page { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 36px 40px 28px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(14,115,119,.25);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: 80px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(232,168,56,.15);
+  }
+  .header-tag {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .header h1 span { color: var(--gold); }
+  .header-sub { color: #9BB8C9; font-size: 13px; }
+  .header-meta {
+    margin-top: 20px;
+    display: flex; gap: 24px; flex-wrap: wrap;
+  }
+  .meta-item { color: #9BB8C9; font-size: 12px; }
+  .meta-item b { color: var(--gold); }
+
+  /* ── RESOURCE BOX ── */
+  .resource-box {
+    background: var(--teal);
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 16px;
+    color: var(--white);
+  }
+  .resource-icon { font-size: 36px; }
+  .resource-box h3 { font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; opacity: .7; }
+  .resource-box p { font-size: 16px; font-weight: 600; margin-top: 2px; }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 22px 20px;
+    box-shadow: 0 2px 12px rgba(13,51,73,.07);
+    position: relative;
+    overflow: hidden;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(13,51,73,.12); }
+  .card-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 5px; height: 100%;
+    border-radius: 12px 0 0 12px;
+  }
+  .card h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 8px; padding-left: 8px; }
+  .card p, .card li { font-size: 12.5px; color: var(--gray); line-height: 1.6; }
+  .card .emoji { font-size: 28px; margin-bottom: 8px; display: block; }
+  ul { padding-left: 16px; }
+  ul li { margin-bottom: 4px; }
+
+  /* ── FULL CARD ── */
+  .full-card {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 22px 28px;
+    margin-bottom: 16px;
+    color: var(--white);
+  }
+  .full-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.15);
+    color: var(--white);
+    font-size: 12px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .pill:hover, .pill.active { background: var(--teal2); border-color: var(--teal2); }
+
+  /* ── KNOWLEDGE TABLE ── */
+  .knowledge-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .know-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 18px 14px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    transition: transform .2s;
+  }
+  .know-card:hover { transform: translateY(-2px); }
+  .know-card .icon { font-size: 32px; margin-bottom: 8px; }
+  .know-card .label { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .know-card .desc { font-size: 11px; color: var(--gray); line-height: 1.5; }
+  .know-card .tag {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+
+  /* ── SYNTHESIS ── */
+  .synthesis {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--navy) 100%);
+    border-radius: 12px;
+    padding: 24px 28px;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .synthesis h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .synthesis p { font-size: 13px; line-height: 1.75; }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--gray);
+    padding: 12px 0 24px;
+  }
+
+  /* ── TOOLTIP ── */
+  [data-tooltip] { position: relative; cursor: help; }
+  [data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%; transform: translateX(-50%);
+    background: var(--navy);
+    color: var(--white);
+    font-size: 11px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0; pointer-events: none;
+    transition: opacity .2s;
+    z-index: 10;
+  }
+  [data-tooltip]:hover::after { opacity: 1; }
+
+  @media (max-width: 640px) {
+    .grid-2, .grid-3, .knowledge-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-tag">Infografía Académica</div>
+    <h1>Evaluación de <span>Aptitudes e Intereses</span><br>Profesionales</h1>
+    <p class="header-sub">Objeto Virtual de Aprendizaje (OVA) · Psicología del Desarrollo I</p>
+    <div class="header-meta">
+      <div class="meta-item"><b>Participante:</b> Danielaida Calcaño Espino</div>
+      <div class="meta-item"><b>ID:</b> 100087048</div>
+      <div class="meta-item"><b>Asignatura:</b> Prueba de Aptitudes e Intereses</div>
+      <div class="meta-item"><b>Facilitadora:</b> Kania Pimentel</div>
+      <div class="meta-item"><b>Institución:</b> UAPA · 2025</div>
+    </div>
+  </div>
+
+  <!-- RESOURCE NAME -->
+  <div class="resource-box">
+    <div class="resource-icon">🎓</div>
+    <div>
+      <h3>Recurso Utilizado</h3>
+      <p>OVA – Objeto Virtual de Aprendizaje sobre Evaluación de Aptitudes e Intereses Profesionales</p>
+    </div>
+  </div>
+
+  <!-- CONCEPTOS CLAVE -->
+  <div class="full-card">
+    <h2>📌 Conceptos Clave Abordados</h2>
+    <div class="pills">
+      <span class="pill active">Aptitud</span>
+      <span class="pill">Interés Profesional</span>
+      <span class="pill">Autoconcepto</span>
+      <span class="pill">Autoeficacia</span>
+      <span class="pill">Intereses Inventariados</span>
+      <span class="pill">Intereses Expresados</span>
+      <span class="pill">Orientación Vocacional</span>
+      <span class="pill">Medición Psicométrica</span>
+      <span class="pill">Inventarios de Holland</span>
+      <span class="pill">Diferencias de Género</span>
+      <span class="pill">Influencias Culturales</span>
+      <span class="pill">Temperamento</span>
+    </div>
+  </div>
+
+  <!-- KNOWLEDGE CARDS -->
+  <div class="knowledge-grid">
+    <div class="know-card">
+      <div class="icon">🧠</div>
+      <div class="label">Aptitud</div>
+      <div class="desc">Capacidad natural o adquirida para desempeñar una tarea con facilidad y rendimiento superior.</div>
+      <span class="tag" style="background:#E8F4F0; color:#0D7377;">Cognitiva</span>
+    </div>
+    <div class="know-card">
+      <div class="icon">🎯</div>
+      <div class="label">Interés Profesional</div>
+      <div class="desc">Preferencia estable hacia actividades, tareas o campos ocupacionales específicos.</div>
+      <span class="tag" style="background:#FEF6E8; color:#C47A15;">Vocacional</span>
+    </div>
+    <div class="know-card">
+      <div class="icon">🪞</div>
+      <div class="label">Autoconcepto</div>
+      <div class="desc">Imagen que el individuo tiene de sí mismo, incluyendo habilidades, limitaciones y valores.</div>
+      <span class="tag" style="background:#EEE8F8; color:#6B4FA0;">Psicosocial</span>
+    </div>
+    <div class="know-card">
+      <div class="icon">💪</div>
+      <div class="label">Autoeficacia</div>
+      <div class="desc">Creencia en la propia capacidad para ejecutar conductas necesarias y alcanzar metas (Bandura).</div>
+      <span class="tag" style="background:#FDE8E8; color:#C0392B;">Motivacional</span>
+    </div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-accent" style="background: var(--teal);"></div>
+      <span class="emoji">📋</span>
+      <h3>Intereses Inventariados vs Expresados</h3>
+      <ul>
+        <li><b>Inventariados:</b> medidos con cuestionarios estandarizados; mayor validez predictiva.</li>
+        <li><b>Expresados:</b> declaraciones verbales directas; influenciados por expectativas sociales.</li>
+        <li>Los inventariados revelan intereses ocultos o no conscientes.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-accent" style="background: var(--gold);"></div>
+      <span class="emoji">🔬</span>
+      <h3>Principales Instrumentos de Medición</h3>
+      <ul>
+        <li data-tooltip="Realista, Investigador, Artístico, Social, Emprendedor, Convencional"><b>Holland RIASEC</b> – tipología vocacional hexagonal</li>
+        <li><b>Strong Interest Inventory</b> – perfiles ocupacionales detallados</li>
+        <li><b>DAT</b> – Differential Aptitude Tests</li>
+        <li><b>Kuder</b> – preferencias vocacionales por áreas</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-accent" style="background: #4A90D9;"></div>
+      <span class="emoji">⚥</span>
+      <h3>Diferencias de Sexo</h3>
+      <ul>
+        <li>Hombres tienden hacia intereses Realistas e Investigativos (ciencias exactas, tecnología).</li>
+        <li>Mujeres hacia intereses Sociales y Artísticos (educación, salud, humanidades).</li>
+        <li>Estas diferencias disminuyen con la reducción de barreras socioculturales.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-accent" style="background: #14A085;"></div>
+      <span class="emoji">🌍</span>
+      <h3>Influencias Culturales</h3>
+      <ul>
+        <li>La cultura transmite qué profesiones son valoradas o accesibles.</li>
+        <li>El entorno familiar y educativo modela las aspiraciones vocacionales.</li>
+        <li>Muchas pruebas tienen sesgos culturales de origen anglosajón.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SYNTHESIS -->
+  <div class="synthesis">
+    <h2>✍️ Síntesis de lo Aprendido</h2>
+    <p>
+      El OVA sobre Evaluación de Aptitudes e Intereses permitió comprender cómo los instrumentos psicométricos —como los inventarios de intereses y las pruebas de aptitud— constituyen herramientas esenciales para la orientación vocacional. Se aprendió que los intereses profesionales pueden medirse de manera objetiva a través de inventarios estandarizados, los cuales revelan preferencias que el individuo no siempre reconoce conscientemente (intereses inventariados), a diferencia de los intereses expresados que dependen de la autopercepción. Asimismo, se analizaron las diferencias estadísticas entre sexos en los perfiles de intereses, resaltando la importancia de no generalizar resultados al individuo. Finalmente, se reconoció que las influencias culturales, familiares y socioeconómicas moldean profundamente los intereses y deben considerarse en cualquier proceso de evaluación y orientación vocacional.
+    </p>
+  </div>
+
+  <div class="footer">
+    Infografía elaborada por Danielaida Calcaño Espino · ID 100087048 · UAPA 2025 · Psicología del Desarrollo I · Facilitadora: Kania Pimentel
+  </div>
+
+</div>
+<script>
+  document.querySelectorAll('.pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('.pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
